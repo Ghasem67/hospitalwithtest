@@ -8,5 +8,6 @@ namespace Hospital.Entities
 {
     public class Patient:Person
     {
+        public HashSet<Appointment> Appointments { get; set; }
     }
 }

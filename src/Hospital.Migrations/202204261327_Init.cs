@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace Hospital.Migrations
 {
-    [Migration(20220426)]
-    public class _20220426_Init : Migration
+    [Migration(202204261327)]
+    public class _202204261327_Init : Migration
     {
         public override void Up()
         {
-            CreateAppointment();
-            CreatePatient();
             CreateDoctor();
+            CreatePatient();
+            CreateAppointment();
+           
+            
         }
         public override void Down()
         {

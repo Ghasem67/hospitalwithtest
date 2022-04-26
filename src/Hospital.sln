@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Migrations", "Hospital.Migrations\Hospital.Migrations.csproj", "{D847AA75-07EF-457F-8E2D-D3DC2522A674}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Persistence.EF", "Hospital.Persistence.EF\Hospital.Persistence.EF.csproj", "{4CD65F89-37AD-4908-BFD2-4E0DD388B310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Service", "Hospital.Service\Hospital.Service.csproj", "{6F24B648-31A1-42C2-8E77-A0AF67A2AFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.RestAPI", "Hospital.RestAPI\Hospital.RestAPI.csproj", "{B9B1C87C-410B-4F65-9C20-CC254FF27948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{D847AA75-07EF-457F-8E2D-D3DC2522A674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D847AA75-07EF-457F-8E2D-D3DC2522A674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D847AA75-07EF-457F-8E2D-D3DC2522A674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD65F89-37AD-4908-BFD2-4E0DD388B310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD65F89-37AD-4908-BFD2-4E0DD388B310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD65F89-37AD-4908-BFD2-4E0DD388B310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD65F89-37AD-4908-BFD2-4E0DD388B310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F24B648-31A1-42C2-8E77-A0AF67A2AFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F24B648-31A1-42C2-8E77-A0AF67A2AFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F24B648-31A1-42C2-8E77-A0AF67A2AFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F24B648-31A1-42C2-8E77-A0AF67A2AFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B1C87C-410B-4F65-9C20-CC254FF27948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B1C87C-410B-4F65-9C20-CC254FF27948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B1C87C-410B-4F65-9C20-CC254FF27948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B1C87C-410B-4F65-9C20-CC254FF27948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

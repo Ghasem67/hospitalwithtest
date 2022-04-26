@@ -9,6 +9,6 @@ namespace Hospital.Entities
     public class Doctor:Person
     {
         public string Field { get; set; }
-
+        public HashSet<Appointment> Appointments { get; set; }
     }
 }

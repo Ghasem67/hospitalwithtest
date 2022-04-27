@@ -58,6 +58,34 @@ namespace Hospital.Services.TestUnit.Appointments
 
         }
         [Fact]
+        public void Add_adds_appointment_DoNotDuplicate()
+        {
+            var Patient = GeneratePatientDTO("abbas", "abbasi", "12345667890");
+            _dbContext.Manipulate(_ => _.Patients.Add(Patient));
+            var doctor = GenerateDoctorDTO();
+            _dbContext.Manipulate(_ => _.Doctors.Add(doctor));
+            DateTime date = DateTime.Now.Date;
+            Appointment dto = new Appointment()
+            {
+                Date = date,
+                DoctorId = doctor.Id,
+                PatientId = Patient.Id
+            };
+            _dbContext.Manipulate(_ => _.Appointments.Add(dto));
+            AddAppointmentDTO appointmentdto = new AddAppointmentDTO()
+            {
+                Date = date,
+                DoctorId = doctor.Id,
+                PatientId = Patient.Id
+            };
+
+
+          Action except=()=>  _sut.Add(appointmentdto);
+
+
+            except.Should().Throw<ExistenceOfDuplicateRecordsException>();
+        }
+        [Fact]
         public void Delete_delets_One_Appointment()
         {
             var Patient = GeneratePatientDTO("ali","amiri","1234567890");

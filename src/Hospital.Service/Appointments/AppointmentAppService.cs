@@ -23,25 +23,32 @@ namespace Hospital.Services.Appointments
 
         public void Add(AddAppointmentDTO addAppointmentDTO)
         {
+            AddfullcapacityCheck(addAppointmentDTO);
+            AddDuplicateRecordscheck(addAppointmentDTO);
             Appointment appointment = new Appointment
             {
                 Date = addAppointmentDTO.Date,
                 DoctorId = addAppointmentDTO.DoctorId,
                 PatientId = addAppointmentDTO.PatientId
             };
-        var appointmentliset=    _appointmentRepository.GetAll(addAppointmentDTO.DoctorId, addAppointmentDTO.Date);
-            if (appointmentliset.Count()==4)
+            var duplicaterecord = _appointmentRepository.Get(addAppointmentDTO.DoctorId, addAppointmentDTO.Date, addAppointmentDTO.PatientId);
+            if (duplicaterecord > 0)
+            {
+                throw new ExistenceOfDuplicateRecordsException();
+            }
+            var appointmentliset = _appointmentRepository.GetAll(addAppointmentDTO.DoctorId, addAppointmentDTO.Date);
+            if (appointmentliset.Count() == 4)
             {
                 throw new NotInofSpaceException();
-            } 
+            }
             _appointmentRepository.Add(appointment);
             _unitOfWork.commit();
         }
 
         public void Delete(int id)
         {
-            var appointment=_appointmentRepository.GetById(id);
-            if (appointment==null)
+            var appointment = _appointmentRepository.GetById(id);
+            if (appointment == null)
             {
                 throw new AppointmentNotFoundException();
             }
@@ -50,22 +57,63 @@ namespace Hospital.Services.Appointments
 
         }
 
-        public HashSet<ShowAppointmentDTO> GetAll(int doctorid,DateTime date)
+        public HashSet<ShowAppointmentDTO> GetAll(int doctorid, DateTime date)
         {
             return _appointmentRepository.GetAll(doctorid, date);
         }
 
         public void Update(UpdateAppointmentDTO updateAppointmentDTO, int id)
         {
+            UpdateDuplicateRecordscheck(updateAppointmentDTO);
+            UpdatefullcapacityCheck(updateAppointmentDTO);
             var appointment = _appointmentRepository.GetById(id);
+            UpdateNullAppointmentCheck(appointment);
+           
+            appointment.Date = updateAppointmentDTO.Date;
+            appointment.DoctorId = updateAppointmentDTO.DoctorId;
+            appointment.PatientId = updateAppointmentDTO.PatientId;
+            _unitOfWork.commit();
+        }
+        private void UpdateNullAppointmentCheck(Appointment appointment)
+        {
             if (appointment == null)
             {
                 throw new AppointmentNotFoundException();
             }
-            appointment.Date = updateAppointmentDTO.Date;
-            appointment.DoctorId = updateAppointmentDTO.DoctorId;
-            appointment.PatientId=updateAppointmentDTO.PatientId;
-            _unitOfWork.commit();
+        }
+        private void UpdatefullcapacityCheck(UpdateAppointmentDTO updateAppointmentDTO)
+        {
+
+            var appointmentliset = _appointmentRepository.GetAll(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date);
+            if (appointmentliset.Count() == 4)
+            {
+                throw new NotInofSpaceException();
+            }
+        }
+        private void UpdateDuplicateRecordscheck(UpdateAppointmentDTO updateAppointmentDTO)
+        {
+            var duplicaterecord = _appointmentRepository.Get(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date, updateAppointmentDTO.PatientId);
+            if (duplicaterecord > 0)
+            {
+                throw new ExistenceOfDuplicateRecordsException();
+            }
+        }
+        private void AddfullcapacityCheck(AddAppointmentDTO updateAppointmentDTO)
+        {
+
+            var appointmentliset = _appointmentRepository.GetAll(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date);
+            if (appointmentliset.Count() == 4)
+            {
+                throw new NotInofSpaceException();
+            }
+        }
+        private void AddDuplicateRecordscheck(AddAppointmentDTO updateAppointmentDTO)
+        {
+            var duplicaterecord = _appointmentRepository.Get(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date, updateAppointmentDTO.PatientId);
+            if (duplicaterecord > 0)
+            {
+                throw new ExistenceOfDuplicateRecordsException();
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Hospital.Entities;
-using Hospital.Service.Doctors.Contracts;
+using Hospital.Services.Doctors.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

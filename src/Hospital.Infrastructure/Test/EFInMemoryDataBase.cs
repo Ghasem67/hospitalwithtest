@@ -1,24 +1,18 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
-namespace Hospital.Infrastructure
+namespace Hospital.Infrastructure.Test
 {
-    public  class EFInMemoryDatabase : IDisposable
+    public class EFInMemoryDataBase : IDisposable
     {
         private readonly SqliteConnection _connection;
-
-        public EFInMemoryDatabase()
+        public EFInMemoryDataBase()
         {
             _connection = new SqliteConnection("filename=:memory:");
             _connection.Open();
         }
-
         private ConstructorInfo? FindSuitableConstructor<TDbContext>() where TDbContext : DbContext
         {
             var flags = BindingFlags.Instance |
@@ -44,7 +38,6 @@ namespace Hospital.Infrastructure
 
             return constructor;
         }
-
         private Func<TDbContext> ResolveFactory<TDbContext>() where TDbContext : DbContext
         {
             var dbContextOptions = new DbContextOptionsBuilder<TDbContext>().UseSqlite(_connection).Options;
@@ -60,7 +53,6 @@ namespace Hospital.Infrastructure
 
             return () => constructor.Invoke(new object[] { dbContextOptions }) as TDbContext;
         }
-
         public TDbContext CreateDataContext<TDbContext>(params object[] entities) where TDbContext : DbContext
         {
             var dbContext = ResolveFactory<TDbContext>().Invoke();
@@ -74,7 +66,6 @@ namespace Hospital.Infrastructure
 
             return dbContext;
         }
-
         public void Dispose()
         {
             _connection?.Dispose();

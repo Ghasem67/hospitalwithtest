@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Service.Patients.Constracts
+namespace Hospital.Services.Patients.Constracts
 {
-    internal class UpdatePatientDTO
+    public class UpdatePatientDTO
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string NationalCode { get; set; }
     }
 }

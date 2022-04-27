@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Hospital.Infrastructure\Hospital.Infrastructure.csproj" />
     <ProjectReference Include="..\Hospital.Persistence.EF\Hospital.Persistence.EF.csproj" />
-    <ProjectReference Include="..\Hospital.Service\Hospital.Service.csproj" />
+    <ProjectReference Include="..\Hospital.Service\Hospital.Services.csproj" />
     <ProjectReference Include="..\Hospital.Test.Tools\Hospital.Test.Tools.csproj" />
   </ItemGroup>
 

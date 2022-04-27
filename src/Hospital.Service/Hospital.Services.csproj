@@ -9,10 +9,4 @@
     <ProjectReference Include="..\Hospital.Infrastructure\Hospital.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Appointments\Contracts\" />
-    <Folder Include="Patients\Constracts\" />
-    <Folder Include="Patients\Exceptions\" />
-  </ItemGroup>
-
 </Project>

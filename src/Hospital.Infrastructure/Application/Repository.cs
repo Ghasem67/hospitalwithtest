@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Services.Appointments.Exceptions
+namespace Hospital.Infrastructure.Application
 {
-    public class AppointmentNotFoundException : Exception
+    public interface Repository
     {
     }
 }

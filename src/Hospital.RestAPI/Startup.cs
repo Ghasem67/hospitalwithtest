@@ -1,3 +1,8 @@
+using Autofac;
+using Hospital.Infrastructure.Application;
+using Hospital.Persistence.EF;
+using Hospital.Persistence.EF.Doctors;
+using Hospital.Services.Doctors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace Hospital.RestAPI
 {
     public class Startup
@@ -23,7 +27,7 @@ namespace Hospital.RestAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+      
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -33,8 +37,28 @@ namespace Hospital.RestAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hospital.RestAPI", Version = "v1" });
             });
         }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterType<EFDbContext>()
+                .WithParameter("connectionString", Configuration["ConnectionString"])
+                 .AsSelf()
+                 .InstancePerLifetimeScope();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            builder.RegisterAssemblyTypes(typeof(EFDoctorRepository).Assembly)
+                      .AssignableTo<Repository>()
+                      .AsImplementedInterfaces()
+                      .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(DoctorAppService).Assembly)
+                      .AssignableTo<Service>()
+                      .AsImplementedInterfaces()
+                      .InstancePerLifetimeScope();
+
+            builder.RegisterType<EFUnitOfWork>()
+                .As<UnitOfWork>()
+                .InstancePerLifetimeScope();
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Service.Patients.Constracts
+namespace Hospital.Services.Patients.Constracts
 {
-    internal class ShowPatientDTO
+    public class ShowPatientDTO
     {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string NationalCode { get; set; }
     }
 }

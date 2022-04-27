@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Service.Doctors.Contracts
+namespace Hospital.Services.Doctors.Contracts
 {
     public interface DoctorRepository
     {

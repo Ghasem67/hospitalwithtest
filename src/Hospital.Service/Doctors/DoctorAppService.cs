@@ -1,13 +1,15 @@
 ﻿using Hospital.Entities;
 using Hospital.Infrastructure;
-using Hospital.Service.Doctors.Contracts;
+using Hospital.Infrastructure.Application;
+using Hospital.Services.Doctors.Contracts;
+using Hospital.Services.Doctors.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Service.Doctors
+namespace Hospital.Services.Doctors
 {
     public class DoctorAppService : DoctorService
     {
@@ -54,12 +56,12 @@ namespace Hospital.Service.Doctors
             var doctor = _doctorRepository.GetById(id);
             if (doctor == null)
             {
-
+                throw new DoctorNotFoundException();
             }
-            doctor.FirstName = doctor.FirstName;
-            doctor.LastName = doctor.LastName;
-            doctor.Field= doctor.Field;
-            doctor.NationalCode= doctor.NationalCode;
+            doctor.FirstName = updateDoctorDTO.FirstName;
+            doctor.LastName = updateDoctorDTO.LastName;
+            doctor.Field= updateDoctorDTO.Field;
+            doctor.NationalCode= updateDoctorDTO.NationalCode;
             _unitOfWork.commit();
         }
     }

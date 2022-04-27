@@ -6,12 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital.Entities\Hospital.Entities.csproj" />
-    <ProjectReference Include="..\Hospital.Infrastructure\Hospital.Infrastructure.csproj" />
-    <ProjectReference Include="..\Hospital.Service\Hospital.Service.csproj" />
+    <ProjectReference Include="..\Hospital.Service\Hospital.Services.csproj" />
   </ItemGroup>
 
 </Project>

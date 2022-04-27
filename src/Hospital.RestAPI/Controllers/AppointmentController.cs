@@ -1,6 +1,7 @@
 ﻿using Hospital.Services.Appointments.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace Hospital.RestAPI.Controllers
@@ -31,9 +32,9 @@ namespace Hospital.RestAPI.Controllers
             _appointmentService.Delete(id);
         }
         [HttpGet]
-        public HashSet<ShowAppointmentDTO> GetAll()
+        public HashSet<ShowAppointmentDTO> GetAll(int doctorid, DateTime date)
         {
-            return _appointmentService.GetAll();
+            return _appointmentService.GetAll(doctorid, date);
         }
     }
 }

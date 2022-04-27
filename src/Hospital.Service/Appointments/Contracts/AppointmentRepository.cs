@@ -12,6 +12,7 @@ namespace Hospital.Services.Appointments.Contracts
         void Add(Appointment appointment);
         void Delete(Appointment appointment);
         Appointment GetById(int id);
-        HashSet<ShowAppointmentDTO> GetAll();
+        HashSet<ShowAppointmentDTO> GetAll(int doctorid, DateTime date);
+
     }
 }

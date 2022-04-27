@@ -93,7 +93,6 @@ namespace Hospital.Servicess.TestUnit.Doctors
             var expected = _sut.GetAll();
             expected.Should().HaveCount(3);
 
-            expected.Should().HaveCount(3);
             expected.Should().Contain(_ => _.FirstName == "name1");
             expected.Should().Contain(_ => _.LastName == "lastname1");
             expected.Should().Contain(_ => _.Field == "field1");

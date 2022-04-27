@@ -29,6 +29,11 @@ namespace Hospital.Services.Appointments
                 DoctorId = addAppointmentDTO.DoctorId,
                 PatientId = addAppointmentDTO.PatientId
             };
+        var appointmentliset=    _appointmentRepository.GetAll(addAppointmentDTO.DoctorId, addAppointmentDTO.Date);
+            if (appointmentliset.Count()==4)
+            {
+                throw new NotInofSpaceException();
+            } 
             _appointmentRepository.Add(appointment);
             _unitOfWork.commit();
         }
@@ -45,9 +50,9 @@ namespace Hospital.Services.Appointments
 
         }
 
-        public HashSet<ShowAppointmentDTO> GetAll()
+        public HashSet<ShowAppointmentDTO> GetAll(int doctorid,DateTime date)
         {
-            return _appointmentRepository.GetAll();
+            return _appointmentRepository.GetAll(doctorid, date);
         }
 
         public void Update(UpdateAppointmentDTO updateAppointmentDTO, int id)

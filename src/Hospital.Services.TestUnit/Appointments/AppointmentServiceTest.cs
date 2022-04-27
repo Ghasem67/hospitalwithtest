@@ -58,7 +58,7 @@ namespace Hospital.Services.TestUnit.Appointments
 
         }
         [Fact]
-        public void Add_adds_appointment_DoNotDuplicate_Exception()
+        public void Add_appointment_Check_DoNotDuplicate()
         {
             var Patient = GeneratePatientDTO("abbas", "abbasi", "12345667890");
             _dbContext.Manipulate(_ => _.Patients.Add(Patient));
@@ -78,7 +78,6 @@ namespace Hospital.Services.TestUnit.Appointments
                 DoctorId = doctor.Id,
                 PatientId = Patient.Id
             };
-
 
           Action except=()=>  _sut.Add(appointmentdto);
 
@@ -107,7 +106,7 @@ namespace Hospital.Services.TestUnit.Appointments
             _dbContext.Appointments.Should().HaveCount(0);
         }
         [Fact]
-        private void GetAll_getalls_returns_all_Patient()
+        private void GetAll_getalls_Returns_all_Patient()
         {
             var doctor = GenerateDoctorDTO();
             _dbContext.Manipulate(_ => _.Doctors.Add(doctor));
@@ -137,32 +136,24 @@ namespace Hospital.Services.TestUnit.Appointments
 
             Action excpt=()=> _sut.Add(addAppointmentDTO);
 
-            
             excpt.Should().ThrowExactly<NotInofSpaceException>();
         }
         private void generate4appointment(int doctorid)
         {
             List<Appointment> appointments = new List<Appointment>();
-            var Patient = GeneratePatientDTO("ali", "amiri", "1234567890");
-            _dbContext.Manipulate(_ => _.Patients.Add(Patient));
+            var patient = GeneratePatientDTO("ali", "amiri", "1234567890");
 
-            appointments.Add(  new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, PatientId = Patient.Id });
-             Patient = GeneratePatientDTO("abbas", "amiri", "1234567990");
-            _dbContext.Manipulate(_ => _.Patients.Add(Patient));
+            appointments.Add(  new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, Patient= patient });
+             patient = GeneratePatientDTO("abbas", "amiri", "1234567990");
 
-            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, PatientId = Patient.Id });
-            Patient = GeneratePatientDTO("ali", "amiri", "2234567990");
-            _dbContext.Manipulate(_ => _.Patients.Add(Patient));
+            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, Patient = patient });
+            patient = GeneratePatientDTO("ali", "amiri", "2234567990");
 
-            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, PatientId = Patient.Id });
-            Patient = GeneratePatientDTO("reza", "amiri", "3234567990");
-            _dbContext.Manipulate(_ => _.Patients.Add(Patient));
+            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, Patient = patient });
+            patient = GeneratePatientDTO("reza", "amiri", "3234567990");
 
-            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, PatientId = Patient.Id });
+            appointments.Add(new Appointment { Date = DateTime.Now.Date, DoctorId = doctorid, Patient = patient });
             _dbContext.Manipulate(_ => _.Appointments.AddRange(appointments));
-
-           
-
         }
 
 

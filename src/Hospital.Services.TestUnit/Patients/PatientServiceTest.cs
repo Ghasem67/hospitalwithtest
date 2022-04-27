@@ -58,7 +58,7 @@ namespace Hospital.Services.TestUnit.Patients
             };
             var Patient = PatientFactory.CreatPatient(addPatient);
             _context.Manipulate(_ => _.Patients.Add(Patient));
-            var dto = GenerateUpdateCategoryDto("abbas", "mohammadi", "123454321");
+            var dto = GenerateUpdatePatientDto("abbas", "mohammadi", "123454321");
 
 
             _sut.Update(dto, Patient.Id);
@@ -128,7 +128,7 @@ namespace Hospital.Services.TestUnit.Patients
                 NationalCode = "2300987654"
             };
         }
-        private static UpdatePatientDTO GenerateUpdateCategoryDto(string firstName,
+        private static UpdatePatientDTO GenerateUpdatePatientDto(string firstName,
           string lastName,
           string NationalCode)
         {

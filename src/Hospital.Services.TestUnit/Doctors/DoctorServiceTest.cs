@@ -61,7 +61,7 @@ namespace Hospital.Servicess.TestUnit.Doctors
             var doctor = DoctorFactory.CreatDoctor(adddoctor);
 
             _context.Manipulate(_ => _.Doctors.Add(doctor));
-            var dto = GenerateUpdateCategoryDto("abbas", "mohammadi", "123454321", "omumi");
+            var dto = GenerateUpdateDoctorDto("abbas", "mohammadi", "123454321", "omumi");
             _sut.Update(dto, doctor.Id);
             var expected = _context.Doctors
               .FirstOrDefault(_ => _.Id == doctor.Id);
@@ -71,7 +71,7 @@ namespace Hospital.Servicess.TestUnit.Doctors
             expected.Field.Should().Be(dto.Field);
         }
         [Fact]
-        public void Delete_Delete_One_docto()
+        public void Delete_Delete_One_doctor()
         {
             var adddoctor = new AddDoctorDTO()
             {
@@ -86,7 +86,7 @@ namespace Hospital.Servicess.TestUnit.Doctors
             var expected = _context.Doctors.Should().HaveCount(0);
         }
         [Fact]
-        public void GetAll_returns_all_Doctor()
+        public void GetAll_Returns_all_Doctor()
         {
             CreateDoctorInDataBase();
 
@@ -107,12 +107,12 @@ namespace Hospital.Servicess.TestUnit.Doctors
        
 
         [Fact]
-        public void Update_throw_CategoryNotFoundException_when_category_with_given_id_is_not_exist()
+        public void Update_throw_DoctorNotFoundException_when_Doctor_with_given_id_is_not_exist()
         {
-            var dummyCategoryId = 19000;
-            var dto = GenerateUpdateCategoryDto("abbas","amiri","1234321123","dakheli");
+            var dummyDoctorId = 19000;
+            var dto = GenerateUpdateDoctorDto("abbas","amiri","1234321123","dakheli");
 
-            Action expected = () => _sut.Update(dto, dummyCategoryId);
+            Action expected = () => _sut.Update(dto, dummyDoctorId);
 
             expected.Should().ThrowExactly<DoctorNotFoundException>();
         }
@@ -137,7 +137,7 @@ namespace Hospital.Servicess.TestUnit.Doctors
             _context.Manipulate(_ =>
             _.Doctors.AddRange(Doctor));
         }
-        private static UpdateDoctorDTO GenerateUpdateCategoryDto(string firstName,
+        private static UpdateDoctorDTO GenerateUpdateDoctorDto(string firstName,
             string lastName,
             string NationalCode,string Field)
         {

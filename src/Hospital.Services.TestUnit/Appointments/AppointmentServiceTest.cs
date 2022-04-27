@@ -58,7 +58,7 @@ namespace Hospital.Services.TestUnit.Appointments
 
         }
         [Fact]
-        public void Add_adds_appointment_DoNotDuplicate()
+        public void Add_adds_appointment_DoNotDuplicate_exception()
         {
             var Patient = GeneratePatientDTO("abbas", "abbasi", "12345667890");
             _dbContext.Manipulate(_ => _.Patients.Add(Patient));

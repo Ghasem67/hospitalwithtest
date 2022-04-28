@@ -31,12 +31,15 @@ namespace Hospital.Persistence.EF.Appointments
 
         public int Get(int doctorid, DateTime date,int PatientId)
         {
-            return _appointments.Where(x => x.DoctorId.Equals(doctorid) && x.Date.Date.Equals(date.Date) && x.PatientId.Equals(PatientId)).Count();
+            return _appointments.Where(x => x.DoctorId.Equals(doctorid) && 
+            x.Date.Date.Equals(date.Date) && x.PatientId.Equals(PatientId)).Count();
         }
 
         public HashSet<ShowAppointmentDTO> GetAll(int doctorid,DateTime date)
         {
-           return _appointments.Where(x=>x.DoctorId.Equals(doctorid)&&x.Date.Date.Equals(date.Date)).Select(_ => new ShowAppointmentDTO {Date=_.Date,DoctorName=_.Doctor.FirstName+" "+_.Doctor.LastName,PatientName=_.Patient.FirstName+" "+_.Patient.LastName }).ToHashSet();
+           return _appointments.Where(x=>x.DoctorId.Equals(doctorid)&&x.Date.Date.Equals(date.Date))
+                .Select(_ => new ShowAppointmentDTO {Date=_.Date,DoctorName=_.Doctor.FirstName+" "+_.Doctor.LastName,
+                    PatientName=_.Patient.FirstName+" "+_.Patient.LastName }).ToHashSet();
         }
 
         public Appointment GetById(int id)

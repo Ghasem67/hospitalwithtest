@@ -30,17 +30,9 @@ namespace Hospital.Services.Appointments
                 Date = addAppointmentDTO.Date,
                 DoctorId = addAppointmentDTO.DoctorId,
                 PatientId = addAppointmentDTO.PatientId
-            };
-            var duplicaterecord = _appointmentRepository.Get(addAppointmentDTO.DoctorId, addAppointmentDTO.Date, addAppointmentDTO.PatientId);
-            if (duplicaterecord > 0)
-            {
-                throw new ExistenceOfDuplicateRecordsException();
-            }
-            var appointmentliset = _appointmentRepository.GetAll(addAppointmentDTO.DoctorId, addAppointmentDTO.Date);
-            if (appointmentliset.Count() == 4)
-            {
-                throw new NotInofSpaceException();
-            }
+            }; AddfullcapacityCheck(addAppointmentDTO);
+
+             
             _appointmentRepository.Add(appointment);
             _unitOfWork.commit();
         }
@@ -98,18 +90,18 @@ namespace Hospital.Services.Appointments
                 throw new ExistenceOfDuplicateRecordsException();
             }
         }
-        private void AddfullcapacityCheck(AddAppointmentDTO updateAppointmentDTO)
+        private void AddfullcapacityCheck(AddAppointmentDTO addAppointmentDTO)
         {
 
-            var appointmentliset = _appointmentRepository.GetAll(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date);
+            var appointmentliset = _appointmentRepository.GetAll(addAppointmentDTO.DoctorId, addAppointmentDTO.Date);
             if (appointmentliset.Count() == 4)
             {
                 throw new NotInofSpaceException();
             }
         }
-        private void AddDuplicateRecordscheck(AddAppointmentDTO updateAppointmentDTO)
+        private void AddDuplicateRecordscheck(AddAppointmentDTO addAppointmentDTO)
         {
-            var duplicaterecord = _appointmentRepository.Get(updateAppointmentDTO.DoctorId, updateAppointmentDTO.Date, updateAppointmentDTO.PatientId);
+            var duplicaterecord = _appointmentRepository.Get(addAppointmentDTO.DoctorId, addAppointmentDTO.Date, addAppointmentDTO.PatientId);
             if (duplicaterecord > 0)
             {
                 throw new ExistenceOfDuplicateRecordsException();
